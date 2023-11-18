@@ -55,6 +55,9 @@ return(
       <li  class={`nav-item  ${window.location.href.includes('home') ?  'active' : "" } `}>
         <a style={{color : `${window.location.href.includes('home') ? `${theme == 'light' ? "red"  :"yellow"}` : `${theme == 'light' ?  "black" :"white"}`  }` }} class="nav-link" onClick={()=>{navigate('/home')}}>Home </a>
       </li>
+      <li  class={`nav-item  ${window.location.href.includes('previous-orders') ?  'active' : "" } `}>
+        <a style={{color : `${window.location.href.includes('previous-orders') ? `${theme == 'light' ? "red"  :"yellow"}` : `${theme == 'light' ?  "black" :"white"}`  }` }} class="nav-link" onClick={()=>{navigate('/previous-orders')}}>Previous Orders</a>
+      </li>
       {/* <li class={`nav-item  ${window.location.href.includes('about') ?  'active' : "" } `}>
         <a style={{color : `${window.location.href.includes('about') ? `${theme == 'light' ? "red"  :"yellow"}` : `${theme == 'light' ?  "black" :"white"}`}` }} class="nav-link" onClick={()=>{navigate('/about')}}>About </a>
       </li>

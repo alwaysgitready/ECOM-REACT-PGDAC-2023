@@ -15,6 +15,7 @@ import ViewProduct from "../Screens/ViewProducts"
 import Cart from "../Screens/Cart"
 import Checkout from "../Screens/Checkout"
 import AddAddress from "../Screens/AddAddress"
+import PreviousOrder from "../Screens/PreviousOrders"
 
 
 
@@ -43,6 +44,7 @@ return(
 <Route  path='/checkout' element={<Checkout/>}  />
 <Route  path='/add-address' element={<AddAddress/>}  />
 <Route  path='/view-product/:id' element={<ViewProduct/>}  />
+<Route  path='/previous-orders' element={<PreviousOrder/>}  />
 <Route  path='*' element={<Home/>}  />
 
 

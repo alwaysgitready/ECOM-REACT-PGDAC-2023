@@ -9,6 +9,7 @@ import AddProduct from "../Screens/AdminScreens/AddProduct"
 import ViewProductAdmin from "../Screens/AdminScreens/ViewProduct"
 import EditProduct from "../Screens/AdminScreens/EditProduct"
 import AdminDashboard from "../Screens/AdminScreens/AdminDashboard"
+import AllOrders from "../Screens/AdminScreens/AllOrders"
 
 
 
@@ -30,6 +31,7 @@ return(
 <Route  path='/add-product' element={<AddProduct/>}  />
 <Route  path='/view-product/:id' element={<ViewProductAdmin/>}  />
 <Route  path='/edit-product/:id' element={<EditProduct/>}  />
+<Route  path='/all-orders' element={<AllOrders/>}  />
 <Route  path='*' element={<AdminDashboard/>}  />
 
 

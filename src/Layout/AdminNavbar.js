@@ -54,8 +54,9 @@ return(
       <li  class={`nav-item  ${window.location.href.includes('home') ?  'active' : "" } `}>
         <a style={{color : `${window.location.href.includes('home') ? `${theme == 'light' ? "red"  :"yellow"}` : `${theme == 'light' ?  "black" :"white"}`  }` }} class="nav-link" onClick={()=>{navigate('/home')}}>All Product</a>
       </li>
-     
-    
+      <li  class={`nav-item  ${window.location.href.includes('all-orders') ?  'active' : "" } `}>
+        <a style={{color : `${window.location.href.includes('all-orders') ? `${theme == 'light' ? "red"  :"yellow"}` : `${theme == 'light' ?  "black" :"white"}`  }` }} class="nav-link" onClick={()=>{navigate('/all-orders')}}>All Orders</a>
+      </li>
     </ul>
     <div class="form-inline my-2 my-lg-0"  style={{position  :"absolute" , right : 0 , marginRight : 20} }>
      
