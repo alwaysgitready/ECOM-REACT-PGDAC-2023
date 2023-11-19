@@ -18,7 +18,17 @@ function ViewProduct(){
     const {state}  = useLocation()
     console.log(state)
 
+    const [variation , setVariation] = useState([state.image ,  ...state.variation])
 
+    const [mainImage  , setMainImage ] =  useState(state.image)
+
+
+    const handleVarationClick =  (i ,el) =>{
+
+      setMainImage(el)
+
+
+    }
 
     return(
 
@@ -27,12 +37,21 @@ function ViewProduct(){
 
 <div class="container text-center">
   <div class="row">
-    <div class="col" tyle={{ display  :"flex" ,  justifyContent  :"left" ,  alignItems  :"flex-end"}}>
+    <div class="col-sm-2" tyle={{ display  :"flex" ,  justifyContent  :"left" ,  alignItems  :"flex-end"}}>
+    {variation.map((el,i)=>(
+
+      <img  onClick={()=> handleVarationClick(i , el)} src={el} style={{width :"100px" ,  height  :"100px" , display : "block" }} class="card-img-top" alt="..." />
+
+    ))}
+
+
+    </div>
+    <div class="col-sm-4" tyle={{ display  :"flex" ,  justifyContent  :"left" ,  alignItems  :"flex-end"}}>
     <div class="card" style={{width: "100%"}}>
-  <img src={state.image} class="card-img-top" alt="..." />
+  <img src={mainImage} class="card-img-top" alt="..." />
 </div>
     </div>
-    <div class="col" style={{ display  :"flex" ,  justifyContent  :"left" ,  alignItems  :"flex-start"}}>
+    <div class="col-sm-6" style={{ display  :"flex" ,  justifyContent  :"left" ,  alignItems  :"flex-start"}}>
     <div class="card" style={{width: "100%"}}>
 <div class="card-body">
   <h5 class="card-title">{state.name}</h5>

@@ -27,6 +27,7 @@ const AddProduct =  () =>{
             price : 0 , 
             discount  : 0,
             image   :"",
+            temp_image : "",
             category   :"",
             description  : "",
             rating : 0
@@ -46,7 +47,17 @@ const AddProduct =  () =>{
 
         setLoading(true)
 
-        axios.post(Admin_BASE_URL + '/add-product' ,  values).then((res)=>{
+
+        let fd =  new FormData()
+        fd.append('name' , values.name)
+        fd.append('price' , values.price)
+        fd.append('discount' , values.discount)
+        fd.append('description' , values.description)
+        fd.append('category' , values.category)
+        fd.append('rating' , values.rating)
+        fd.append('img' , values.image)
+
+        axios.post(Admin_BASE_URL + '/add-product' ,  fd).then((res)=>{
 
             toast.success(res.data.message)
             setLoading(false)
@@ -59,6 +70,18 @@ const AddProduct =  () =>{
 
 
     }
+
+    const hanldeImages = (e) =>{
+
+      console.log(e.target.files[0])
+
+      setValues({...values , ['image'] : e.target.files[0] ,  ['temp_image'] : URL.createObjectURL(e.target.files[0]) })
+
+    }
+
+
+
+
 
 
 
@@ -101,8 +124,11 @@ const AddProduct =  () =>{
   </div>
   <div class="form-group">
     <label for="l6">Product Image</label>
-    <textarea name="image" onChange={handleForm}  value={values.image} class="form-control" id="l6" rows="3"></textarea>
+    <input name="image" type="file" onChange={hanldeImages}  class="form-control" id="l6" ></input>
   </div>
+
+   <img src={values.temp_image}  width='100px'  height='100px' />               
+
   <button  onClick={handleSubmit} style={{width  :"100%" ,  marginTop  : 10}} type="submit" class="btn btn-primary">Submit</button>
 </>
 

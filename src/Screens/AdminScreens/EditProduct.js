@@ -4,7 +4,7 @@ import { toast } from "react-toastify"
 import { Admin_BASE_URL } from "../../Config/BaseUrlconfig"
 import Lottie from "react-lottie"
 import * as animationData from '../../Assets/Loading.json';
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 
 
@@ -22,6 +22,7 @@ const defaultOptions = {
 const EditProduct =  () =>{
 
     const {state}  = useLocation()
+    const navigate = useNavigate()
 
 
     const [values , setValues ]  = useState({
@@ -30,6 +31,7 @@ const EditProduct =  () =>{
             price :state.price , 
             discount  : state.discount,
             image   :state.image,
+            temp_image  : state.image,
             category   : state.category,
             description  :state.description,
             rating : state.rating,
@@ -63,6 +65,33 @@ const EditProduct =  () =>{
 
 
     }
+
+    const handleImages  =  (e) =>{
+
+      console.log(e.target.files)
+
+      let fd =  new FormData()
+      fd.append('p_id' , values.pid)
+      fd.append('img' , e.target.files[0] )
+
+      setValues({...values  , ['temp_image'] :  URL.createObjectURL(e.target.files[0])})
+
+      // setLoading(true)
+      axios.post(Admin_BASE_URL  +'/update-product-image' , fd).then((res)=>{
+
+        toast(res.data.message)
+        
+        setValues({...values  , ['temp_image'] :  res.data.data.image  })
+      }).catch((err)=>{
+         toast.error(err.response.data.message)
+      })
+
+
+    }
+
+
+
+
 
 
 
@@ -103,13 +132,21 @@ const EditProduct =  () =>{
     <label for="l7">Product Rating</label>
     <input type="number" name="rating" onChange={handleForm}  value={values.rating} class="form-control" id="l7" ></input>
   </div>
-  <div class="form-group">
+  {/* <div class="form-group">
     <label for="l6">Product Image</label>
     <textarea name="image" onChange={handleForm}  value={values.image} class="form-control" id="l6" rows="3"></textarea>
-  </div>
+  </div> */}
   <div class="form-group">
-  <label for="l6">Selected Product Image</label>
-    <img src={values.image} width='100px' height='100px' />
+    <img src={values.temp_image} width='100px' height='100px' />
+    {/* <button for="h1" className="btn btn-primary" >Change Image</button> */}
+    <label for="h1"  className="btn btn-primary">Change Image</label>
+    <input  onChange={handleImages} id="h1" type="file"  style={{display : "none"}}  />
+  </div>
+
+  <div style={{marginTop: 10  , marginBottom :10}}>
+
+  <i class="fa-solid fa-arrow-right"></i> <a onClick={()=>navigate('/add-variation/'  + state._id ,  {state : state})} style={{color : "blue"  , textDecoration : "underline" , cursor  :"pointer"}}>Add Product Variation</a>
+
   </div>
   <button  onClick={handleSubmit} style={{width  :"100%" ,  marginTop  : 10}} type="submit" class="btn btn-primary">Save Changes</button>
 </>
