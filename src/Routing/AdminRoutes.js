@@ -11,6 +11,7 @@ import EditProduct from "../Screens/AdminScreens/EditProduct"
 import AdminDashboard from "../Screens/AdminScreens/AdminDashboard"
 import AllOrders from "../Screens/AdminScreens/AllOrders"
 import AddVariations from "../Screens/AdminScreens/AddVariations"
+import AllUsers from "../Screens/AdminScreens/AllUsers"
 
 
 
@@ -34,6 +35,7 @@ return(
 <Route  path='/edit-product/:id' element={<EditProduct/>}  />
 <Route  path='/all-orders' element={<AllOrders/>}  />
 <Route  path='/add-variation/:id' element={<AddVariations/>}  />
+<Route  path='/all-users' element={<AllUsers/>}  />
 <Route  path='*' element={<AdminDashboard/>}  />
 
 
