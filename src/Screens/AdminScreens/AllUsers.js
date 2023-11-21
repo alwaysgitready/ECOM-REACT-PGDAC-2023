@@ -104,6 +104,28 @@ function AllUsers() {
 
     }
 
+    const sendPasswordResetLink  = (name , uid , email) =>{
+        set_pass_loading(true)
+        setChangePassData({...changePassData ,  ['_id']  :uid})
+
+        let dt  =  {u_id : uid , email: email , name : name}
+        axios.post(Admin_BASE_URL + '/send_password_resetlink', dt ).then((res)=>{
+ 
+            toast.success(res.data.message)
+            set_pass_loading(false)
+
+            getallUsersList()
+           
+
+        }).catch((err)=>{
+            toast.error(err.response.data.message)
+            set_pass_loading(false)
+          
+        })   
+
+
+    }
+
     
 
 
@@ -154,6 +176,7 @@ function AllUsers() {
       <th scope="col">Change Password</th>
       <th scope="col">Edit</th>
       <th scope="col">Enable/Disable</th>
+      <th scope="col">Send Password Reset Link</th>
     
     </tr>
   </thead>
@@ -183,6 +206,23 @@ function AllUsers() {
         </td>
       <td><i class="fa-solid fa-pen-to-square"></i></td>
       <td>{el.disable == false ?  <i  onClick={()=> handleActiveInactive(el._id , el.disable)} style={{color : "green"}} class="fa-solid fa-thumbs-up"></i> : <i onClick={()=> handleActiveInactive(el._id , el.disable)} style={{color : 'red'}} class="fa-solid fa-thumbs-down"></i>}</td>
+        <td>
+        {pass_loading == true  && el._id == changePassData._id  ?
+
+            <div class="spinner-border text-success" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+
+        :
+            <>
+           
+                {el.have_pwd_reset_link  == false ? <i onClick={()=>{sendPasswordResetLink(el.name, el._id , el.email)}} class="fa-solid fa-paper-plane"></i> : <span> <button onClick={()=>{sendPasswordResetLink(el.name, el._id , el.email)}} className="btn btn-primary">Resend Link</button> </span> }
+                
+               
+            </>
+
+        }
+        </td>
     </tr>
    
 
